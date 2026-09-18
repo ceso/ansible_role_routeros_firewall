@@ -1,0 +1,7 @@
+---
+# roles/ansible_role_routeros_firewall/vars/main.yml
+
+# API request timeout in seconds
+__routeros_firewall_api_timeout: 30
+
+# eof

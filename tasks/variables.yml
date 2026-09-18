@@ -1,0 +1,22 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/variables.yml
+
+- name: Define routeros_firewall_api_timeout
+  ansible.builtin.set_fact:
+    routeros_firewall_api_timeout: "{{ __routeros_firewall_api_timeout }}"
+  when: routeros_firewall_api_timeout is not defined
+
+- name: Prompt for API password
+  ansible.builtin.pause:
+    prompt: "Enter API password for '{{ routeros_firewall_api_username }}' on {{ routeros_firewall_api_hostname }} ({{ inventory_hostname }})"
+    echo: false
+  register: __routeros_firewall_api_password_prompt
+  when: routeros_firewall_api_password is not defined
+
+- name: Set API password from prompt
+  ansible.builtin.set_fact:
+    routeros_firewall_api_password: "{{ __routeros_firewall_api_password_prompt.user_input }}"
+  no_log: true
+  when: routeros_firewall_api_password is not defined
+
+# eof

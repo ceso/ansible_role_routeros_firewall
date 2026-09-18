@@ -1,0 +1,62 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/ipv4/main.yml
+#
+# Table application order matters for safety:
+# 1. connection_tracking - config, no rules
+# 2. address_lists       - needed by rules
+# 3. mangle              - packet marking
+# 4. nat                 - translation
+# 5. filter              - has accept est/rel/unt to protect API connection
+# 6. raw                 - LAST: most aggressive, implicit deny in prerouting
+#                          runs before conntrack in packet flow
+
+- name: Include IPv4 variables and validation
+  ansible.builtin.include_tasks:
+    file: variables.yml
+    apply:
+      tags: [firewall, ipv4]
+  tags: [firewall, ipv4]
+
+- name: Include IPv4 connection tracking configuration
+  ansible.builtin.include_tasks:
+    file: connection_tracking.yml
+    apply:
+      tags: [firewall, ipv4, connection_tracking]
+  tags: [firewall, ipv4, connection_tracking]
+
+- name: Include IPv4 address lists configuration
+  ansible.builtin.include_tasks:
+    file: address_lists.yml
+    apply:
+      tags: [firewall, ipv4, address_lists]
+  tags: [firewall, ipv4, address_lists]
+
+- name: Include IPv4 mangle table configuration
+  ansible.builtin.include_tasks:
+    file: mangle.yml
+    apply:
+      tags: [firewall, ipv4, mangle]
+  tags: [firewall, ipv4, mangle]
+
+- name: Include IPv4 NAT table configuration
+  ansible.builtin.include_tasks:
+    file: nat.yml
+    apply:
+      tags: [firewall, ipv4, nat]
+  tags: [firewall, ipv4, nat]
+
+- name: Include IPv4 filter table configuration
+  ansible.builtin.include_tasks:
+    file: filter.yml
+    apply:
+      tags: [firewall, ipv4, filter]
+  tags: [firewall, ipv4, filter]
+
+- name: Include IPv4 raw table configuration
+  ansible.builtin.include_tasks:
+    file: raw.yml
+    apply:
+      tags: [firewall, ipv4, raw]
+  tags: [firewall, ipv4, raw]
+
+# eof

@@ -1,0 +1,17 @@
+---
+# roles/ansible_role_routeros_firewall/meta/main.yml
+
+galaxy_info:
+  author: ceso
+  description: Manage MikroTik RouterOS firewall rules via API
+  license: MIT
+
+  min_ansible_version: "2.10"
+
+  galaxy_tags:
+    - routeros
+    - mikrotik
+    - firewall
+    - networking
+
+dependencies: []

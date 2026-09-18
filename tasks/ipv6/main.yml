@@ -1,0 +1,46 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/ipv6/main.yml
+
+- name: Include IPv6 variables and validation
+  ansible.builtin.include_tasks:
+    file: variables.yml
+    apply:
+      tags: [firewall, ipv6]
+  tags: [firewall, ipv6]
+
+- name: Include IPv6 address lists configuration
+  ansible.builtin.include_tasks:
+    file: address_lists.yml
+    apply:
+      tags: [firewall, ipv6, address_lists]
+  tags: [firewall, ipv6, address_lists]
+
+- name: Include IPv6 raw table configuration
+  ansible.builtin.include_tasks:
+    file: raw.yml
+    apply:
+      tags: [firewall, ipv6, raw]
+  tags: [firewall, ipv6, raw]
+
+- name: Include IPv6 filter table configuration
+  ansible.builtin.include_tasks:
+    file: filter.yml
+    apply:
+      tags: [firewall, ipv6, filter]
+  tags: [firewall, ipv6, filter]
+
+- name: Include IPv6 NAT table configuration
+  ansible.builtin.include_tasks:
+    file: nat.yml
+    apply:
+      tags: [firewall, ipv6, nat]
+  tags: [firewall, ipv6, nat]
+
+- name: Include IPv6 mangle table configuration
+  ansible.builtin.include_tasks:
+    file: mangle.yml
+    apply:
+      tags: [firewall, ipv6, mangle]
+  tags: [firewall, ipv6, mangle]
+
+# eof

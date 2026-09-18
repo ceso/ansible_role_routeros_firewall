@@ -1,0 +1,31 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/ipv4/variables.yml
+
+- name: Validate IPv4 rule variables are lists
+  ansible.builtin.assert:
+    that:
+      - routeros_firewall_ipv4_raw_rules is sequence
+      - routeros_firewall_ipv4_filter_rules is sequence
+      - routeros_firewall_ipv4_nat_rules is sequence
+      - routeros_firewall_ipv4_mangle_rules is sequence
+    fail_msg: >-
+      All routeros_firewall_ipv4_*_rules variables must be lists of dicts.
+    quiet: true
+
+- name: Validate IPv4 connection tracking is a dict
+  ansible.builtin.assert:
+    that:
+      - routeros_firewall_ipv4_connection_tracking is mapping
+    fail_msg: >-
+      routeros_firewall_ipv4_connection_tracking must be a dict.
+    quiet: true
+
+- name: Validate IPv4 address list variable is a list
+  ansible.builtin.assert:
+    that:
+      - routeros_firewall_ipv4_address_lists is sequence
+    fail_msg: >-
+      routeros_firewall_ipv4_address_lists must be a list of dicts.
+    quiet: true
+
+# eof

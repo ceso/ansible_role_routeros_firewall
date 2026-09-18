@@ -1,0 +1,23 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/ipv6/variables.yml
+
+- name: Validate IPv6 rule variables are lists
+  ansible.builtin.assert:
+    that:
+      - routeros_firewall_ipv6_raw_rules is sequence
+      - routeros_firewall_ipv6_filter_rules is sequence
+      - routeros_firewall_ipv6_nat_rules is sequence
+      - routeros_firewall_ipv6_mangle_rules is sequence
+    fail_msg: >-
+      All routeros_firewall_ipv6_*_rules variables must be lists of dicts.
+    quiet: true
+
+- name: Validate IPv6 address list variable is a list
+  ansible.builtin.assert:
+    that:
+      - routeros_firewall_ipv6_address_lists is sequence
+    fail_msg: >-
+      routeros_firewall_ipv6_address_lists must be a list of dicts.
+    quiet: true
+
+# eof

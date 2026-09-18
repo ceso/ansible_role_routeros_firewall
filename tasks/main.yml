@@ -1,0 +1,25 @@
+---
+# roles/ansible_role_routeros_firewall/tasks/main.yml
+
+- name: Include variables and validation
+  ansible.builtin.include_tasks:
+    file: variables.yml
+    apply:
+      tags: [firewall]
+  tags: [firewall]
+
+- name: Include IPv4 firewall configuration
+  ansible.builtin.include_tasks:
+    file: ipv4/main.yml
+    apply:
+      tags: [firewall, ipv4]
+  tags: [firewall, ipv4]
+
+- name: Include IPv6 firewall configuration
+  ansible.builtin.include_tasks:
+    file: ipv6/main.yml
+    apply:
+      tags: [firewall, ipv6]
+  tags: [firewall, ipv6]
+
+# eof

@@ -1,0 +1,34 @@
+---
+# roles/ansible_role_routeros_firewall/defaults/main.yml
+#
+# All rule lists default to empty. Provide values via host_vars.
+# If a list is empty, the role will NOT touch that table on the device.
+
+# IPv4 rule lists
+routeros_firewall_ipv4_raw_rules: []
+routeros_firewall_ipv4_filter_rules: []
+routeros_firewall_ipv4_nat_rules: []
+routeros_firewall_ipv4_mangle_rules: []
+
+# IPv6 rule lists
+routeros_firewall_ipv6_raw_rules: []
+routeros_firewall_ipv6_filter_rules: []
+routeros_firewall_ipv6_nat_rules: []
+routeros_firewall_ipv6_mangle_rules: []
+
+# Connection tracking settings (dict, applied to /ip firewall connection tracking)
+routeros_firewall_ipv4_connection_tracking: {}
+
+# Address lists (list of dicts with 'list' and optionally 'address' keys)
+routeros_firewall_ipv4_address_lists: []
+routeros_firewall_ipv6_address_lists: []
+
+# API connection settings
+routeros_firewall_api_hostname: "{{ ansible_host }}"
+routeros_firewall_api_username: "{{ ansible_user }}"
+routeros_firewall_api_tls: true
+routeros_firewall_api_port: 8729
+routeros_firewall_api_validate_certs: false
+routeros_firewall_api_validate_cert_hostname: false
+
+# eof
